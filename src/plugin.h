@@ -79,13 +79,16 @@ class GitPlugin : public cbPlugin {
           * @param data pointer to FileTreeData object (to access/modify the file tree)
           */
         virtual void BuildModuleMenu(const ModuleType type, wxMenu* menu, const FileTreeData* data = 0);
-
         virtual bool BuildToolBar(wxToolBar* toolBar) { return false; }
 
     protected:
         virtual void OnAttach();
         virtual void OnRelease(bool appShutDown);
         void OnMenuImport(wxCommandEvent& event);
+
+        void buildFileMenu(wxMenu* menu);
+        void buildFolderMenu(wxMenu* menu);
+        void buildProjectMenu(wxMenu* menu);
 
     private:
         DECLARE_EVENT_TABLE();

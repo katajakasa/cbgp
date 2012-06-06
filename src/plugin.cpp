@@ -73,10 +73,36 @@ void GitPlugin::OnMenuImport(wxCommandEvent& event) {
     }
 }
 
+void GitPlugin::buildFileMenu(wxMenu* menu) {
+    // TODO: File menu
+}
+
+void GitPlugin::buildFolderMenu(wxMenu* menu) {
+    // TODO: Folder menu
+}
+
+void GitPlugin::buildProjectMenu(wxMenu* menu) {
+    wxMenu* gitMenu = new wxMenu();
+    wxMenuItem* initItem = new wxMenuItem(gitMenu, wxID_ANY, _("Init"));
+    wxMenuItem* commitItem = new wxMenuItem(gitMenu, wxID_ANY, _("Commit"));
+    wxMenuItem* pushItem = new wxMenuItem(gitMenu, wxID_ANY, _("Push"));
+    wxMenuItem* pullItem = new wxMenuItem(gitMenu, wxID_ANY, _("Pull"));
+
+    gitMenu->Append(initItem);
+    gitMenu->Append(commitItem);
+    gitMenu->Append(pushItem);
+    gitMenu->Append(pullItem);
+
+    menu->AppendSubMenu(gitMenu, _("Git"));
+}
+
 void GitPlugin::BuildModuleMenu(const ModuleType type, wxMenu* menu, const FileTreeData* data) {
-    //Some library module is ready to display a pop-up menu.
-    //Check the parameter \"type\" and see which module it is
-    //and append any items you need in the menu...
-    //TIP: for consistency, add a separator as the first item...
-    NotImplemented(_T("Codeblocks_Git_Plugin::BuildModuleMenu()"));
+    if(!IsAttached()) return;
+    if(type != mtProjectManager) return;
+
+    switch(data->GetKind()) {
+        case FileTreeData::ftdkProject: buildProjectMenu(menu); break;
+        case FileTreeData::ftdkFile:    buildFileMenu(menu);    break;
+        case FileTreeData::ftdkFolder:  buildFolderMenu(menu);  break;
+    }
 }
