@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_plugin_manifest_file>
+    <SdkVersion major="1" minor="13"  release="3" />
+    <Plugin name="Codeblocks_Git_Plugin">
+        <Value title="Codeblocks Git Plugin" />
+        <Value version="0.1" />
+        <Value description="" />
+        <Value author="Katajakasa" />
+        <Value authorEmail="katajakasa@gmail.com" />
+        <Value authorWebsite="http://www.katajakasa.net" />
+        <Value thanksTo="" />
+        <Value license="MIT" />
+    </Plugin>
+</CodeBlocks_plugin_manifest_file>

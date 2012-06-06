@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CBGP" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="bin\Codeblocks_Git_Plugin" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\" />
+				<Option object_output="obj" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option host_application="$(#cb)\devel29\codeblocks.exe" />
+				<Option run_host_application_in_terminal="0" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-pipe" />
+					<Add option="-mthreads" />
+					<Add option="-fmessage-length=0" />
+					<Add option="-fexceptions" />
+					<Add option="-Winvalid-pch" />
+					<Add option="-DBUILDING_PLUGIN" />
+					<Add option="-DHAVE_W32API_H" />
+					<Add option="-D__WXMSW__" />
+					<Add option="-DWXUSINGDLL" />
+					<Add option="-DcbDEBUG" />
+					<Add option="-DCB_PRECOMP" />
+					<Add option="-DWX_PRECOMP" />
+					<Add option="-DwxUSE_UNICODE" />
+					<Add directory="$(#cb)\include" />
+					<Add directory="$(#cb)\sdk\wxscintilla\include" />
+					<Add directory="$(#wx.include)" />
+					<Add directory="$(#wx.lib)\gcc_dll\mswu" />
+					<Add directory="$(#wx.lib)\wx\include\msw-unicode-2.9" />
+					<Add directory="src\" />
+				</Compiler>
+				<Linker>
+					<Add option="-mthreads" />
+					<Add library="codeblocks" />
+					<Add library="wx_mswu-2.9.dll" />
+					<Add library="git2" />
+					<Add directory="$(#cb)\devel" />
+					<Add directory="$(#wx.lib)\gcc_dll" />
+					<Add directory="$(#cb)\devel29" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 bin/Codeblocks_Git_Plugin.zip src/manifest.xml" />
+					<Add after="zip -j9 bin/Codeblocks_Git_Plugin.cbplugin bin/Codeblocks_Git_Plugin.dll bin/Codeblocks_Git_Plugin.zip" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Unit filename="gui.fbp" />
+		<Unit filename="src\gui\gitimportdialog.cpp" />
+		<Unit filename="src\gui\gitimportdialog.h" />
+		<Unit filename="src\gui\proto.cpp" />
+		<Unit filename="src\gui\proto.h" />
+		<Unit filename="src\manifest.xml" />
+		<Unit filename="src\ops\clonehandler.cpp" />
+		<Unit filename="src\ops\clonehandler.h" />
+		<Unit filename="src\plugin.cpp" />
+		<Unit filename="src\plugin.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
