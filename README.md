@@ -15,6 +15,7 @@ TODO
 * Push
 * Pull
 * Clone
+* Init
 
 License
 -------
