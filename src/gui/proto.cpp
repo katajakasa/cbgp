@@ -20,14 +20,17 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	pathPage->SetMinSize( wxSize( 500,350 ) );
 	pathPage->SetMaxSize( wxSize( 500,350 ) );
 	
-	wxGridBagSizer* pathPageSizer;
-	pathPageSizer = new wxGridBagSizer( 0, 0 );
-	pathPageSizer->SetFlexibleDirection( wxBOTH );
-	pathPageSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* pathBaseSizer;
+	pathBaseSizer = new wxFlexGridSizer( 4, 1, 0, 0 );
+	pathBaseSizer->AddGrowableCol( 0 );
+	pathBaseSizer->AddGrowableRow( 3 );
+	pathBaseSizer->SetFlexibleDirection( wxBOTH );
+	pathBaseSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
+	wxStaticText* cloneInfoText;
 	cloneInfoText = new wxStaticText( pathPage, wxID_ANY, wxT("For clone operation, the following information is required."), wxDefaultPosition, wxDefaultSize, 0 );
 	cloneInfoText->Wrap( -1 );
-	pathPageSizer->Add( cloneInfoText, wxGBPosition( 0, 0 ), wxGBSpan( 1, 1 ), wxALL, 5 );
+	pathBaseSizer->Add( cloneInfoText, 0, wxALL, 5 );
 	
 	wxStaticBoxSizer* dsPathInfo;
 	dsPathInfo = new wxStaticBoxSizer( new wxStaticBox( pathPage, wxID_ANY, wxT("Local Directory") ), wxHORIZONTAL );
@@ -39,7 +42,7 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	dsPathInfo->Add( selectLocalDirButton, 0, wxALL, 5 );
 	
 	
-	pathPageSizer->Add( dsPathInfo, wxGBPosition( 1, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	pathBaseSizer->Add( dsPathInfo, 1, wxEXPAND, 5 );
 	
 	wxStaticBoxSizer* usPathInfo;
 	usPathInfo = new wxStaticBoxSizer( new wxStaticBox( pathPage, wxID_ANY, wxT("Remote Directory") ), wxHORIZONTAL );
@@ -51,28 +54,34 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	usPathInfo->Add( selectRemoteDirButton, 0, wxALL, 5 );
 	
 	
-	pathPageSizer->Add( usPathInfo, wxGBPosition( 2, 0 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	pathBaseSizer->Add( usPathInfo, 1, wxEXPAND, 5 );
 	
 	
-	pathPageSizer->Add( 0, 0, wxGBPosition( 3, 1 ), wxGBSpan( 1, 1 ), wxEXPAND, 5 );
+	pathBaseSizer->Add( 0, 0, 1, wxEXPAND, 5 );
 	
 	
-	pathPageSizer->AddGrowableCol( 0 );
-	pathPageSizer->AddGrowableRow( 3 );
-	
-	pathPage->SetSizer( pathPageSizer );
+	pathPage->SetSizer( pathBaseSizer );
 	pathPage->Layout();
-	pathPageSizer->Fit( pathPage );
+	pathBaseSizer->Fit( pathPage );
 	wxWizardPageSimple* importPage = new wxWizardPageSimple( this );
 	m_pages.Add( importPage );
 	
 	wxFlexGridSizer* importPageSizer;
-	importPageSizer = new wxFlexGridSizer( 0, 2, 0, 0 );
+	importPageSizer = new wxFlexGridSizer( 3, 1, 0, 0 );
 	importPageSizer->AddGrowableCol( 0 );
-	importPageSizer->AddGrowableRow( 0 );
+	importPageSizer->AddGrowableRow( 2 );
 	importPageSizer->SetFlexibleDirection( wxBOTH );
 	importPageSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
+	wxStaticText* cloneHelpText;
+	cloneHelpText = new wxStaticText( importPage, wxID_ANY, wxT("Cloning repository, please wait ..."), wxDefaultPosition, wxDefaultSize, 0 );
+	cloneHelpText->Wrap( -1 );
+	importPageSizer->Add( cloneHelpText, 0, wxALL, 5 );
+	
+	cloneProgress = new wxGauge( importPage, wxID_ANY, 100, wxDefaultPosition, wxSize( -1,25 ), wxGA_HORIZONTAL );
+	importPageSizer->Add( cloneProgress, 0, wxALL|wxEXPAND, 5 );
+	
+	wxScrolledWindow* importScroller;
 	importScroller = new wxScrolledWindow( importPage, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxSUNKEN_BORDER|wxVSCROLL );
 	importScroller->SetScrollRate( 5, 5 );
 	wxBoxSizer* importScrollerSizer;
@@ -91,20 +100,6 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	importPage->SetSizer( importPageSizer );
 	importPage->Layout();
 	importPageSizer->Fit( importPage );
-	wxWizardPageSimple* completePage = new wxWizardPageSimple( this );
-	m_pages.Add( completePage );
-	
-	wxBoxSizer* bSizer1;
-	bSizer1 = new wxBoxSizer( wxVERTICAL );
-	
-	allDoneLabel = new wxStaticText( completePage, wxID_ANY, wxT("zomg! All done!"), wxDefaultPosition, wxDefaultSize, 0 );
-	allDoneLabel->Wrap( -1 );
-	bSizer1->Add( allDoneLabel, 0, wxALL, 5 );
-	
-	
-	completePage->SetSizer( bSizer1 );
-	completePage->Layout();
-	bSizer1->Fit( completePage );
 	
 	this->Centre( wxBOTH );
 	

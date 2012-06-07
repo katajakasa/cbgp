@@ -20,10 +20,10 @@
 #include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/statbox.h>
-#include <wx/gbsizer.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
+#include <wx/gauge.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/scrolwin.h>
 #include <wx/wizard.h>
@@ -41,14 +41,12 @@ class GitImportDialogProto : public wxWizard
 	private:
 	
 	protected:
-		wxStaticText* cloneInfoText;
 		wxTextCtrl* localDir;
 		wxButton* selectLocalDirButton;
 		wxTextCtrl* remoteDir;
 		wxButton* selectRemoteDirButton;
-		wxScrolledWindow* importScroller;
+		wxGauge* cloneProgress;
 		wxRichTextCtrl* importLog;
-		wxStaticText* allDoneLabel;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnPageChanged( wxWizardEvent& event ) { event.Skip(); }
