@@ -29,6 +29,8 @@
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
+#include <wx/treectrl.h>
+#include <wx/dialog.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -60,6 +62,28 @@ class GitImportDialogProto : public wxWizard
 		GitImportDialogProto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Clone Repository"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE );
 		WizardPages m_pages;
 		~GitImportDialogProto();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class GitCommitDialogProto
+///////////////////////////////////////////////////////////////////////////////
+class GitCommitDialogProto : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* branchLabel;
+		wxTextCtrl* commentText;
+		wxTreeCtrl* changesTree;
+		wxStdDialogButtonSizer* bottomButtonSizer;
+		wxButton* bottomButtonSizerOK;
+		wxButton* bottomButtonSizerCancel;
+	
+	public:
+		
+		GitCommitDialogProto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Commit"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 649,534 ), long style = wxDEFAULT_DIALOG_STYLE ); 
+		~GitCommitDialogProto();
 	
 };
 

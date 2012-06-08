@@ -4,6 +4,7 @@
 #include <git2.h>
 #include "plugin.h"
 #include "gui/gitimportdialog.h"
+#include "gui/gitcommitdialog.h"
 
 namespace {
     PluginRegistrant<GitPlugin> reg(_T("Codeblocks_Git_Plugin"));
@@ -11,10 +12,12 @@ namespace {
 
 // IDs
 int idGitImportEntry = wxNewId();
+int idGitCommitEntry = wxNewId();
 
 // Event table
 BEGIN_EVENT_TABLE(GitPlugin, cbPlugin)
     EVT_MENU(idGitImportEntry, GitPlugin::OnMenuImport)
+    EVT_MENU(idGitCommitEntry, GitPlugin::OnMenuCommit)
 END_EVENT_TABLE()
 
 // Constructor, load resources
@@ -73,6 +76,13 @@ void GitPlugin::OnMenuImport(wxCommandEvent& event) {
     }
 }
 
+void GitPlugin::OnMenuCommit(wxCommandEvent& event) {
+    GitCommitDialog dialog(Manager::Get()->GetAppWindow());
+    if(dialog.ShowModal() == wxID_OK) {
+
+    }
+}
+
 void GitPlugin::buildFileMenu(wxMenu* menu) {
     // TODO: File menu
 }
@@ -84,7 +94,7 @@ void GitPlugin::buildFolderMenu(wxMenu* menu) {
 void GitPlugin::buildProjectMenu(wxMenu* menu) {
     wxMenu* gitMenu = new wxMenu();
     wxMenuItem* initItem = new wxMenuItem(gitMenu, wxID_ANY, _("Init"));
-    wxMenuItem* commitItem = new wxMenuItem(gitMenu, wxID_ANY, _("Commit"));
+    wxMenuItem* commitItem = new wxMenuItem(gitMenu, idGitCommitEntry, _("Commit"));
     wxMenuItem* pushItem = new wxMenuItem(gitMenu, wxID_ANY, _("Push"));
     wxMenuItem* pullItem = new wxMenuItem(gitMenu, wxID_ANY, _("Pull"));
 

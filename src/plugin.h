@@ -84,7 +84,9 @@ class GitPlugin : public cbPlugin {
     protected:
         virtual void OnAttach();
         virtual void OnRelease(bool appShutDown);
+
         void OnMenuImport(wxCommandEvent& event);
+        void OnMenuCommit(wxCommandEvent& event);
 
         void buildFileMenu(wxMenu* menu);
         void buildFolderMenu(wxMenu* menu);

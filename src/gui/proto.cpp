@@ -126,3 +126,73 @@ GitImportDialogProto::~GitImportDialogProto()
 	
 	m_pages.Clear();
 }
+
+GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* baseSizer;
+	baseSizer = new wxFlexGridSizer( 3, 1, 0, 0 );
+	baseSizer->AddGrowableCol( 0 );
+	baseSizer->AddGrowableRow( 1 );
+	baseSizer->AddGrowableRow( 2 );
+	baseSizer->SetFlexibleDirection( wxBOTH );
+	baseSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* infoSizer;
+	infoSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Information") ), wxVERTICAL );
+	
+	wxFlexGridSizer* infoHSizer;
+	infoHSizer = new wxFlexGridSizer( 1, 1, 0, 0 );
+	infoHSizer->AddGrowableCol( 0 );
+	infoHSizer->AddGrowableRow( 0 );
+	infoHSizer->SetFlexibleDirection( wxBOTH );
+	infoHSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	branchLabel = new wxStaticText( this, wxID_ANY, wxT("Commit to branch: master"), wxDefaultPosition, wxDefaultSize, 0 );
+	branchLabel->Wrap( -1 );
+	infoHSizer->Add( branchLabel, 0, wxALL, 5 );
+	
+	
+	infoSizer->Add( infoHSizer, 1, wxEXPAND, 5 );
+	
+	
+	baseSizer->Add( infoSizer, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* commentSizer;
+	commentSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Comment") ), wxVERTICAL );
+	
+	commentText = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE );
+	commentSizer->Add( commentText, 1, wxALL|wxEXPAND, 5 );
+	
+	
+	baseSizer->Add( commentSizer, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* changesSizer;
+	changesSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Changes Made") ), wxVERTICAL );
+	
+	changesTree = new wxTreeCtrl( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_DEFAULT_STYLE );
+	changesSizer->Add( changesTree, 1, wxALL|wxEXPAND, 5 );
+	
+	
+	baseSizer->Add( changesSizer, 1, wxEXPAND, 5 );
+	
+	bottomButtonSizer = new wxStdDialogButtonSizer();
+	bottomButtonSizerOK = new wxButton( this, wxID_OK );
+	bottomButtonSizer->AddButton( bottomButtonSizerOK );
+	bottomButtonSizerCancel = new wxButton( this, wxID_CANCEL );
+	bottomButtonSizer->AddButton( bottomButtonSizerCancel );
+	bottomButtonSizer->Realize();
+	
+	baseSizer->Add( bottomButtonSizer, 1, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( baseSizer );
+	this->Layout();
+	
+	this->Centre( wxBOTH );
+}
+
+GitCommitDialogProto::~GitCommitDialogProto()
+{
+}
