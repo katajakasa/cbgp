@@ -13,6 +13,9 @@ namespace {
 // IDs
 int idGitImportEntry = wxNewId();
 int idGitCommitEntry = wxNewId();
+int idGitPushEntry = wxNewId();
+int idGitPullEntry = wxNewId();
+int idGitInitEntry = wxNewId();
 
 // Event table
 BEGIN_EVENT_TABLE(GitPlugin, cbPlugin)
@@ -93,10 +96,10 @@ void GitPlugin::buildFolderMenu(wxMenu* menu) {
 
 void GitPlugin::buildProjectMenu(wxMenu* menu) {
     wxMenu* gitMenu = new wxMenu();
-    wxMenuItem* initItem = new wxMenuItem(gitMenu, wxID_ANY, _("Init"));
+    wxMenuItem* initItem = new wxMenuItem(gitMenu, idGitInitEntry, _("Init"));
     wxMenuItem* commitItem = new wxMenuItem(gitMenu, idGitCommitEntry, _("Commit"));
-    wxMenuItem* pushItem = new wxMenuItem(gitMenu, wxID_ANY, _("Push"));
-    wxMenuItem* pullItem = new wxMenuItem(gitMenu, wxID_ANY, _("Pull"));
+    wxMenuItem* pushItem = new wxMenuItem(gitMenu, idGitPushEntry, _("Push"));
+    wxMenuItem* pullItem = new wxMenuItem(gitMenu, idGitPullEntry, _("Pull"));
 
     gitMenu->Append(initItem);
     gitMenu->Append(commitItem);
