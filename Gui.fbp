@@ -319,7 +319,7 @@
                                     <event name="OnRightUp"></event>
                                     <event name="OnSetFocus"></event>
                                     <event name="OnSize"></event>
-                                    <event name="OnText"></event>
+                                    <event name="OnText">OnLocalDirectoryChange</event>
                                     <event name="OnTextEnter"></event>
                                     <event name="OnTextMaxLen"></event>
                                     <event name="OnTextURL"></event>
@@ -512,7 +512,7 @@
                                     <event name="OnRightUp"></event>
                                     <event name="OnSetFocus"></event>
                                     <event name="OnSize"></event>
-                                    <event name="OnText"></event>
+                                    <event name="OnText">OnRemoteDirectoryChange</event>
                                     <event name="OnTextEnter"></event>
                                     <event name="OnTextMaxLen"></event>
                                     <event name="OnTextURL"></event>
@@ -1112,7 +1112,7 @@
                 <property name="vgap">0</property>
                 <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
-                    <property name="flag">wxEXPAND</property>
+                    <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
                     <object class="wxStaticBoxSizer" expanded="1">
                         <property name="id">wxID_ANY</property>
@@ -1170,7 +1170,7 @@
                                         <property name="gripper">0</property>
                                         <property name="hidden">0</property>
                                         <property name="id">wxID_ANY</property>
-                                        <property name="label">Commit to branch: master</property>
+                                        <property name="label">Commit to: master</property>
                                         <property name="max_size"></property>
                                         <property name="maximize_button">0</property>
                                         <property name="maximum_size"></property>
@@ -1227,7 +1227,7 @@
                 </object>
                 <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
-                    <property name="flag">wxEXPAND</property>
+                    <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
                     <object class="wxStaticBoxSizer" expanded="1">
                         <property name="id">wxID_ANY</property>
@@ -1332,7 +1332,7 @@
                 </object>
                 <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
-                    <property name="flag">wxEXPAND</property>
+                    <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
                     <object class="wxStaticBoxSizer" expanded="1">
                         <property name="id">wxID_ANY</property>
@@ -1448,7 +1448,7 @@
                 </object>
                 <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
-                    <property name="flag">wxEXPAND</property>
+                    <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
                     <object class="wxStdDialogButtonSizer" expanded="1">
                         <property name="Apply">0</property>

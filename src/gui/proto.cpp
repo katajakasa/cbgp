@@ -112,7 +112,9 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	// Connect Events
 	this->Connect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGED, wxWizardEventHandler( GitImportDialogProto::OnPageChanged ) );
 	this->Connect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGING, wxWizardEventHandler( GitImportDialogProto::OnPageChanging ) );
+	localDir->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirectoryChange ), NULL, this );
 	selectLocalDirButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirClick ), NULL, this );
+	remoteDir->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirectoryChange ), NULL, this );
 	selectRemoteDirButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirClick ), NULL, this );
 }
 
@@ -121,7 +123,9 @@ GitImportDialogProto::~GitImportDialogProto()
 	// Disconnect Events
 	this->Disconnect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGED, wxWizardEventHandler( GitImportDialogProto::OnPageChanged ) );
 	this->Disconnect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGING, wxWizardEventHandler( GitImportDialogProto::OnPageChanging ) );
+	localDir->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirectoryChange ), NULL, this );
 	selectLocalDirButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirClick ), NULL, this );
+	remoteDir->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirectoryChange ), NULL, this );
 	selectRemoteDirButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirClick ), NULL, this );
 	
 	m_pages.Clear();
@@ -149,7 +153,7 @@ GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, con
 	infoHSizer->SetFlexibleDirection( wxBOTH );
 	infoHSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	branchLabel = new wxStaticText( this, wxID_ANY, wxT("Commit to branch: master"), wxDefaultPosition, wxDefaultSize, 0 );
+	branchLabel = new wxStaticText( this, wxID_ANY, wxT("Commit to: master"), wxDefaultPosition, wxDefaultSize, 0 );
 	branchLabel->Wrap( -1 );
 	infoHSizer->Add( branchLabel, 0, wxALL, 5 );
 	
@@ -157,7 +161,7 @@ GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, con
 	infoSizer->Add( infoHSizer, 1, wxEXPAND, 5 );
 	
 	
-	baseSizer->Add( infoSizer, 1, wxEXPAND, 5 );
+	baseSizer->Add( infoSizer, 1, wxALL|wxEXPAND, 5 );
 	
 	wxStaticBoxSizer* commentSizer;
 	commentSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Comment") ), wxVERTICAL );
@@ -166,7 +170,7 @@ GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, con
 	commentSizer->Add( commentText, 1, wxALL|wxEXPAND, 5 );
 	
 	
-	baseSizer->Add( commentSizer, 1, wxEXPAND, 5 );
+	baseSizer->Add( commentSizer, 1, wxALL|wxEXPAND, 5 );
 	
 	wxStaticBoxSizer* changesSizer;
 	changesSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Changes Made") ), wxVERTICAL );
@@ -175,7 +179,7 @@ GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, con
 	changesSizer->Add( changesTree, 1, wxALL|wxEXPAND, 5 );
 	
 	
-	baseSizer->Add( changesSizer, 1, wxEXPAND, 5 );
+	baseSizer->Add( changesSizer, 1, wxALL|wxEXPAND, 5 );
 	
 	bottomButtonSizer = new wxStdDialogButtonSizer();
 	bottomButtonSizerOK = new wxButton( this, wxID_OK );
@@ -184,7 +188,7 @@ GitCommitDialogProto::GitCommitDialogProto( wxWindow* parent, wxWindowID id, con
 	bottomButtonSizer->AddButton( bottomButtonSizerCancel );
 	bottomButtonSizer->Realize();
 	
-	baseSizer->Add( bottomButtonSizer, 1, wxEXPAND, 5 );
+	baseSizer->Add( bottomButtonSizer, 1, wxALL|wxEXPAND, 5 );
 	
 	
 	this->SetSizer( baseSizer );
