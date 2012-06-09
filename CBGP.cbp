@@ -52,6 +52,8 @@
 			</Target>
 		</Build>
 		<Unit filename="gui.fbp" />
+		<Unit filename="src\gui\gitcommitdialog.cpp" />
+		<Unit filename="src\gui\gitcommitdialog.h" />
 		<Unit filename="src\gui\gitimportdialog.cpp" />
 		<Unit filename="src\gui\gitimportdialog.h" />
 		<Unit filename="src\gui\proto.cpp" />

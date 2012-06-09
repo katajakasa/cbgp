@@ -100,6 +100,22 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	importPage->SetSizer( importPageSizer );
 	importPage->Layout();
 	importPageSizer->Fit( importPage );
+	wxWizardPageSimple* projectPage = new wxWizardPageSimple( this );
+	m_pages.Add( projectPage );
+	
+	wxFlexGridSizer* fgSizer6;
+	fgSizer6 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer6->SetFlexibleDirection( wxBOTH );
+	fgSizer6->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	tempText = new wxStaticText( projectPage, wxID_ANY, wxT("On this page, we shouild check whether there already is a project file or not."), wxDefaultPosition, wxDefaultSize, 0 );
+	tempText->Wrap( -1 );
+	fgSizer6->Add( tempText, 0, wxALL, 5 );
+	
+	
+	projectPage->SetSizer( fgSizer6 );
+	projectPage->Layout();
+	fgSizer6->Fit( projectPage );
 	
 	this->Centre( wxBOTH );
 	
@@ -111,7 +127,6 @@ GitImportDialogProto::GitImportDialogProto( wxWindow* parent, wxWindowID id, con
 	
 	// Connect Events
 	this->Connect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGED, wxWizardEventHandler( GitImportDialogProto::OnPageChanged ) );
-	this->Connect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGING, wxWizardEventHandler( GitImportDialogProto::OnPageChanging ) );
 	localDir->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirectoryChange ), NULL, this );
 	selectLocalDirButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirClick ), NULL, this );
 	remoteDir->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirectoryChange ), NULL, this );
@@ -122,7 +137,6 @@ GitImportDialogProto::~GitImportDialogProto()
 {
 	// Disconnect Events
 	this->Disconnect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGED, wxWizardEventHandler( GitImportDialogProto::OnPageChanged ) );
-	this->Disconnect( wxID_ANY, wxEVT_WIZARD_PAGE_CHANGING, wxWizardEventHandler( GitImportDialogProto::OnPageChanging ) );
 	localDir->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirectoryChange ), NULL, this );
 	selectLocalDirButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GitImportDialogProto::OnLocalDirClick ), NULL, this );
 	remoteDir->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( GitImportDialogProto::OnRemoteDirectoryChange ), NULL, this );

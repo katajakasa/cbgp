@@ -49,10 +49,10 @@ class GitImportDialogProto : public wxWizard
 		wxButton* selectRemoteDirButton;
 		wxGauge* cloneProgress;
 		wxRichTextCtrl* importLog;
+		wxStaticText* tempText;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnPageChanged( wxWizardEvent& event ) { event.Skip(); }
-		virtual void OnPageChanging( wxWizardEvent& event ) { event.Skip(); }
 		virtual void OnLocalDirectoryChange( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnLocalDirClick( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoteDirectoryChange( wxCommandEvent& event ) { event.Skip(); }
